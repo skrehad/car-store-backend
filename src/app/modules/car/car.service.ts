@@ -2,7 +2,7 @@ import { TCar } from './car.interface';
 import { Car } from './car.model';
 
 const createCarIntoDB = async (payload: TCar) => {
-  const isCarAlreadyExist = await Car.findOne({ title: payload.model });
+  const isCarAlreadyExist = await Car.findOne({ title: payload.name });
   if (isCarAlreadyExist) {
     throw new Error('This Car is Already Exist ! ');
   }

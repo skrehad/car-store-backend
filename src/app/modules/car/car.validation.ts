@@ -2,8 +2,9 @@ import { z } from 'zod';
 
 // carValidationSchema
 export const carValidationSchema = z.object({
-  brand: z.string().trim().min(4, 'Brand is required').max(15),
-  model: z.string().trim().min(4, 'Model is required').max(15),
+  name: z.string().trim().min(4, 'Name is required').max(50),
+  brand: z.string().trim().min(4, 'Brand is required').max(50),
+  model: z.string().trim().min(4, 'Model is required').max(50),
   year: z
     .number()
     .min(2000, 'Year must be 2000 or later')
@@ -15,14 +16,15 @@ export const carValidationSchema = z.object({
     }),
   }),
   description: z.string().trim().min(10, 'Description is required').max(200),
-  quantity: z
+  stock: z
     .number()
     .int()
     .nonnegative('Quantity must be a non-negative integer'),
-  inStock: z.boolean(),
+  availability: z.boolean(),
 });
 
 export const updateCarValidationSchema = z.object({
+  name: z.string().trim().min(4, 'Name is required').max(15).optional(),
   brand: z.string().trim().min(4, 'Brand is required').max(15).optional(),
   model: z.string().trim().min(4, 'Model is required').max(15).optional(),
   year: z
@@ -42,15 +44,15 @@ export const updateCarValidationSchema = z.object({
   description: z
     .string()
     .trim()
-    .min(10, 'Description is required')
+    .min(5, 'Description is required')
     .max(200)
     .optional(),
-  quantity: z
+  stock: z
     .number()
     .int()
     .nonnegative('Quantity must be a non-negative integer')
     .optional(),
-  inStock: z.boolean().optional(),
+  availability: z.boolean().optional(),
 });
 
 export const CarValidation = {

@@ -4,11 +4,18 @@ import { TCar } from './car.interface';
 // Define Car Schema
 const carSchema = new Schema<TCar>(
   {
+    name: {
+      type: String,
+      required: [true, 'Name is required'],
+      minlength: [4, 'Name name must be at least 4 characters long'],
+      maxlength: [50, 'Name name must be at most 15 characters long'],
+      trim: true,
+    },
     brand: {
       type: String,
       required: [true, 'Brand is required'],
       minlength: [4, 'Brand name must be at least 4 characters long'],
-      maxlength: [15, 'Brand name must be at most 15 characters long'],
+      maxlength: [50, 'Brand name must be at most 15 characters long'],
       trim: true,
     },
     model: {
@@ -37,12 +44,13 @@ const carSchema = new Schema<TCar>(
       required: [true, 'Description is required'],
       trim: true,
     },
-    quantity: {
+    image: { type: String, default: '' },
+    stock: {
       type: Number,
       required: [true, 'Quantity is required'],
       min: [0, 'Quantity must be a non-negative number'],
     },
-    inStock: {
+    availability: {
       type: Boolean,
       required: [true, 'In stock status is required'],
     },
