@@ -20,7 +20,18 @@ const getAdminOrderDataFromDB = async (email: string) => {
   });
   return result;
 };
+
+const getUserOrderDataFromDB = async (email: string) => {
+  // console.log(email);
+  const result = await Order.find({
+    paidStatus: true,
+    'userInfo.email': email,
+  });
+  return result;
+};
+
 export const paymentService = {
   paymentSuccessfulIntoDB,
   getAdminOrderDataFromDB,
+  getUserOrderDataFromDB,
 };

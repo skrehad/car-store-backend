@@ -34,10 +34,10 @@ export const updateCarValidationSchema = z.object({
     .optional(),
   price: z.number().positive('Price must be a positive number').optional(),
   category: z
-    .enum(['Sedan', 'SUV', 'Truck', 'Coupe', 'Convertible'], {
+    .enum(['Sedan', 'SUV', 'Hatchback', 'Coupe', 'Convertible'], {
       errorMap: () => ({
         message:
-          'Category must be one of: Sedan, SUV, Truck, Coupe, Convertible',
+          'Category must be one of: Sedan, SUV, Hatchback, Coupe, Convertible',
       }),
     })
     .optional(),
