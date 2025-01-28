@@ -67,7 +67,37 @@ const registerUser = async (payload: TRegisterUser) => {
   return result;
 };
 
+const getAllUserFromDB = async () => {
+  const result = await UserRegister.find();
+  return result;
+};
+
+const deActiveAccount = async (id: string) => {
+  // console.log(id);
+  const result = await UserRegister.findByIdAndUpdate(id, { isBlocked: true });
+  return result;
+};
+const makeActiveAccount = async (id: string) => {
+  // console.log(id);
+  const result = await UserRegister.findByIdAndUpdate(id, { isBlocked: false });
+  return result;
+};
+
+const changeRoleFromDB = async (userInfo: { role: string; email: string }) => {
+  // console.log('service ', userInfo);
+
+  const result = await UserRegister.findOneAndUpdate(
+    { email: userInfo.email },
+    { role: userInfo.role },
+  );
+  return result;
+};
+
 export const AuthServices = {
   loginUser,
   registerUser,
+  getAllUserFromDB,
+  deActiveAccount,
+  makeActiveAccount,
+  changeRoleFromDB,
 };
