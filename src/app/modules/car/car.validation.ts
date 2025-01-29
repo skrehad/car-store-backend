@@ -10,9 +10,10 @@ export const carValidationSchema = z.object({
     .min(2000, 'Year must be 2000 or later')
     .max(new Date().getFullYear(), 'Year cannot be in the future'),
   price: z.number().positive('Price must be a positive number'),
-  category: z.enum(['Sedan', 'SUV', 'Truck', 'Coupe', 'Convertible'], {
+  category: z.enum(['Sedan', 'SUV', 'Hatchback', 'Coupe', 'Convertible'], {
     errorMap: () => ({
-      message: 'Category must be one of: Sedan, SUV, Truck, Coupe, Convertible',
+      message:
+        'Category must be one of: Sedan, SUV, Hatchback, Coupe, Convertible',
     }),
   }),
   description: z.string().trim().min(10, 'Description is required').max(200),

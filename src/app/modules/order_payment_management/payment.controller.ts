@@ -36,9 +36,42 @@ const getUserOrderData = catchAsync(async (req, res) => {
   });
 });
 
+const acceptOrder = catchAsync(async (req, res) => {
+  const result = await paymentService.acceptOrderIntoDB(req.body.id);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Order accepted successfully',
+    data: result,
+  });
+});
+const cancelOrder = catchAsync(async (req, res) => {
+  // console.log(req.body);
+  const result = await paymentService.cancelOrderIntoDB(req.body.id);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Order canceled successfully',
+    data: result,
+  });
+});
+const DeleteOrder = catchAsync(async (req, res) => {
+  // console.log(req.body);
+  const result = await paymentService.deleteOrderFromDB(req.body.id);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Order deleted successfully',
+    data: result,
+  });
+});
+
 export const paymentController = {
   paymentSuccess,
   paymentFailed,
   getAdminOrderData,
   getUserOrderData,
+  acceptOrder,
+  cancelOrder,
+  DeleteOrder,
 };
