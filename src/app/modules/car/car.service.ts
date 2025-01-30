@@ -22,9 +22,7 @@ const getSingleCarsFromDB = async (id: string) => {
 };
 
 const updateCarFromDb = async (id: string, payload: Partial<TCar>) => {
-  const result = await Car.findByIdAndUpdate({ _id: id }, payload, {
-    new: true,
-  });
+  const result = await Car.findByIdAndUpdate(id, payload, { new: true });
   return result;
 };
 

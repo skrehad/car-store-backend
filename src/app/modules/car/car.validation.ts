@@ -25,9 +25,9 @@ export const carValidationSchema = z.object({
 });
 
 export const updateCarValidationSchema = z.object({
-  name: z.string().trim().min(4, 'Name is required').max(15).optional(),
-  brand: z.string().trim().min(4, 'Brand is required').max(15).optional(),
-  model: z.string().trim().min(4, 'Model is required').max(15).optional(),
+  name: z.string().trim().min(4, 'Name is required').optional(),
+  brand: z.string().trim().min(4, 'Brand is required').optional(),
+  model: z.string().trim().min(4, 'Model is required').optional(),
   year: z
     .number()
     .min(2000, 'Year must be 2000 or later')
@@ -42,12 +42,7 @@ export const updateCarValidationSchema = z.object({
       }),
     })
     .optional(),
-  description: z
-    .string()
-    .trim()
-    .min(5, 'Description is required')
-    .max(200)
-    .optional(),
+  description: z.string().trim().min(5, 'Description is required').optional(),
   stock: z
     .number()
     .int()

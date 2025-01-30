@@ -98,7 +98,7 @@ app.post('/order', async (req: Request, res: Response) => {
       userInfo,
     };
     await Order.create(finalOrder);
-    console.log('Order created successfully:', finalOrder);
+    // console.log('Order created successfully:', finalOrder);
   } catch (error) {
     console.error('Error processing order:', error);
     res.status(500).send({ error: 'Something went wrong' });

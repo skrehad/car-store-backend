@@ -22,7 +22,7 @@ router.get('/:id', CarController.getSingleCar);
 // for update a Car post
 router.patch(
   '/:id',
-  auth(USER_ROLE.admin),
+  // auth(USER_ROLE.admin),
   validateRequest(CarValidation.updateCarValidationSchema),
   CarController.updateCar,
 );

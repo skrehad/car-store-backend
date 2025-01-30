@@ -18,15 +18,17 @@ const getAdminOrderDataFromDB = async (email: string) => {
     paidStatus: true,
     'product.authorEmail': email,
   });
+  // console.log(result);
   return result;
 };
 
 const getUserOrderDataFromDB = async (email: string) => {
-  // console.log(email);
+  console.log('service', email); // Check if email is passed correctly
   const result = await Order.find({
     paidStatus: true,
-    'userInfo.email': email,
+    'userInfo.email': email, // Check if this is correctly matching the field name in DB
   });
+  console.log('service', result); // Log result to verify data
   return result;
 };
 
