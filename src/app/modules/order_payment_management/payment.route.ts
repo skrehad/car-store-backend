@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.post('/success/:tranId', paymentController.paymentSuccess);
 router.post('/failed/:tranId', paymentController.paymentFailed);
-router.put('/get-admin-order-data', paymentController.getAdminOrderData);
-router.get('/get-user-order-data', paymentController.getUserOrderData);
+router.put('/get-order-data', paymentController.getAdminOrderData);
+// router.put('/get-user-order-data', paymentController.getUserOrderData);
 router.put('/accept-order', paymentController.acceptOrder);
 router.put('/cancel-order', paymentController.cancelOrder);
 router.put('/delete-order', paymentController.DeleteOrder);

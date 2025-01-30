@@ -1,3 +1,4 @@
+import { Car } from '../car/car.model';
 import { Order } from './payment.model';
 
 const paymentSuccessfulIntoDB = async (transactionId: string) => {
@@ -8,6 +9,19 @@ const paymentSuccessfulIntoDB = async (transactionId: string) => {
       new: true,
     },
   );
+
+  // console.log('payment', result?.product);
+  const findCar = await Car.findById(result?.product?._id);
+  // console.log('Find car =>', findCar);
+  if (findCar) {
+    const updateBookCount = findCar?.stock - 1;
+    // console.log(updateBookCount);
+
+    await Car.findByIdAndUpdate(
+      { _id: findCar?._id },
+      { stock: updateBookCount },
+    );
+  }
 
   return result;
 };
@@ -22,15 +36,15 @@ const getAdminOrderDataFromDB = async (email: string) => {
   return result;
 };
 
-const getUserOrderDataFromDB = async (email: string) => {
-  console.log('service', email); // Check if email is passed correctly
-  const result = await Order.find({
-    paidStatus: true,
-    'userInfo.email': email, // Check if this is correctly matching the field name in DB
-  });
-  console.log('service', result); // Log result to verify data
-  return result;
-};
+// const getUserOrderDataFromDB = async (email: string) => {
+//   console.log('service', email); // Check if email is passed correctly
+//   const result = await Order.find({
+//     paidStatus: true,
+//     'userInfo.email': email, // Check if this is correctly matching the field name in DB
+//   });
+//   console.log('service', result); // Log result to verify data
+//   return result;
+// };
 
 const acceptOrderIntoDB = async (id: string) => {
   const result = await Order.findByIdAndUpdate(id, {
@@ -52,7 +66,6 @@ const deleteOrderFromDB = async (id: string) => {
 export const paymentService = {
   paymentSuccessfulIntoDB,
   getAdminOrderDataFromDB,
-  getUserOrderDataFromDB,
   acceptOrderIntoDB,
   cancelOrderIntoDB,
   deleteOrderFromDB,

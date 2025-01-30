@@ -25,17 +25,17 @@ const getAdminOrderData = catchAsync(async (req, res) => {
   });
 });
 
-const getUserOrderData = catchAsync(async (req, res) => {
-  console.log('controller', req.body); // Check if email is correctly received in body
-  const result = await paymentService.getUserOrderDataFromDB(req.body.email);
-  sendResponse(res, {
-    statusCode: StatusCodes.OK,
-    success: true,
-    message: 'Order Data found successfully',
-    data: result,
-  });
-  console.log('controller', result); // Verify the result before sending response
-});
+// const getUserOrderData = catchAsync(async (req, res) => {
+//   console.log('controller', req.body); // Check if email is correctly received in body
+//   const result = await paymentService.getUserOrderDataFromDB(req.body.email);
+//   sendResponse(res, {
+//     statusCode: StatusCodes.OK,
+//     success: true,
+//     message: 'Order Data found successfully',
+//     data: result,
+//   });
+//   console.log('controller', result); // Verify the result before sending response
+// });
 
 const acceptOrder = catchAsync(async (req, res) => {
   const result = await paymentService.acceptOrderIntoDB(req.body.id);
@@ -71,7 +71,7 @@ export const paymentController = {
   paymentSuccess,
   paymentFailed,
   getAdminOrderData,
-  getUserOrderData,
+  // getUserOrderData,
   acceptOrder,
   cancelOrder,
   DeleteOrder,
