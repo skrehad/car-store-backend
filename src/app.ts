@@ -3,7 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import SSLCommerzPayment from 'sslcommerz-lts';
+const SSLCommerzPayment = require('sslcommerz-lts');
 
 // Import custom modules and middlewares
 import globalErrorHandler from './app/middlewares/globalErrorhandler';
@@ -25,7 +25,12 @@ const app: Application = express();
 // Middleware setup
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: ['http://localhost:5173'], credentials: true }));
+app.use(
+  cors({
+    origin: ['https://assignment-4-frontend-psi.vercel.app/'],
+    credentials: true,
+  }),
+);
 app.use(bodyParser.json());
 
 // Application routes
@@ -51,8 +56,8 @@ app.post('/order', async (req: Request, res: Response) => {
     total_amount: product?.price as number,
     currency: 'BDT',
     tran_id: tran_id, // use unique tran_id for each api call
-    success_url: `http://localhost:4000/payment/success/${tran_id}`,
-    fail_url: `http://localhost:4000/payment/failed/${tran_id}`,
+    success_url: `https://assignment-4-backend-phi.vercel.app/payment/success/${tran_id}`,
+    fail_url: `https://assignment-4-backend-phi.vercel.app/payment/failed/${tran_id}`,
     cancel_url: 'http://localhost:3030/cancel',
     ipn_url: 'http://localhost:3030/ipn',
     shipping_method: 'Courier',

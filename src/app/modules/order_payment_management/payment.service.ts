@@ -2,25 +2,20 @@ import { Car } from '../car/car.model';
 import { Order } from './payment.model';
 
 const paymentSuccessfulIntoDB = async (transactionId: string) => {
-  const result = await Order.findOneAndUpdate(
+  const result = (await Order.findOneAndUpdate(
     { transactionId: transactionId },
     { paidStatus: true },
-    {
-      new: true,
-    },
-  );
+    { new: true },
+  ).populate('product')) as { product: { _id: string } } | null;
 
-  // console.log('payment', result?.product);
-  const findCar = await Car.findById(result?.product?._id);
-  // console.log('Find car =>', findCar);
+  if (!result || !result) {
+    throw new Error('Order or Product not found');
+  }
+
+  const findCar = await Car.findById(result.product._id);
   if (findCar) {
-    const updateBookCount = findCar?.stock - 1;
-    // console.log(updateBookCount);
-
-    await Car.findByIdAndUpdate(
-      { _id: findCar?._id },
-      { stock: updateBookCount },
-    );
+    const updateCarCount = findCar.stock - 1;
+    await Car.findByIdAndUpdate(findCar._id, { stock: updateCarCount });
   }
 
   return result;

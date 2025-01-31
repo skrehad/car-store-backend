@@ -9,7 +9,7 @@ const router = express.Router();
 // for create a Car post
 router.post(
   '/create-car',
-  // auth(USER_ROLE.admin),
+  auth(USER_ROLE.admin),
   validateRequest(CarValidation.carValidationSchema),
   CarController.createCar,
 );
@@ -22,7 +22,7 @@ router.get('/:id', CarController.getSingleCar);
 // for update a Car post
 router.patch(
   '/:id',
-  // auth(USER_ROLE.admin),
+  auth(USER_ROLE.admin),
   validateRequest(CarValidation.updateCarValidationSchema),
   CarController.updateCar,
 );

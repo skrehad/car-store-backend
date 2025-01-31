@@ -8,10 +8,14 @@ const paymentSuccess = catchAsync(async (req, res) => {
   // console.log('Transaction ID:', tranId);
   await paymentService.paymentSuccessfulIntoDB(tranId);
 
-  res.redirect(`http://localhost:5173/payment-successful/${req.params.tranId}`);
+  res.redirect(
+    `https://assignment-4-frontend-psi.vercel.app/payment-successful/${req.params.tranId}`,
+  );
 });
 const paymentFailed = catchAsync(async (req, res) => {
-  res.redirect(`http://localhost:5173/payment-failed/${req.params.tranId}`);
+  res.redirect(
+    `https://assignment-4-frontend-psi.vercel.app/payment-failed/${req.params.tranId}`,
+  );
 });
 
 const getAdminOrderData = catchAsync(async (req, res) => {
