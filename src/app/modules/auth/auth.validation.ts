@@ -14,7 +14,15 @@ const RegisterValidationSchema = z.object({
   isBlocked: z.boolean().default(false),
 });
 
+const changePasswordValidationSchema = z.object({
+  oldPassword: z.string({
+    required_error: 'Old password is required',
+  }),
+  newPassword: z.string({ required_error: 'Password is required' }),
+});
+
 export const AuthValidation = {
   loginValidationSchema,
   RegisterValidationSchema,
+  changePasswordValidationSchema,
 };

@@ -26,4 +26,10 @@ router.get('/admin/get-all-user-information', AuthController.getAllUser);
 
 router.post('/admin/change-user-role', AuthController.ChangeRole);
 
+// router.post(
+//   '/change-password',
+//   validateRequest(AuthValidation.changePasswordValidationSchema),
+//   AuthController.changePassword,
+// );
+
 export const AuthRoutes = router;

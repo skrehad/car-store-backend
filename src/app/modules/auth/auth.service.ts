@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import config from '../../config';
 import { TLoginUser, TRegisterUser } from './auth.interface';
 import AppError from '../../errors/AppError';
@@ -94,6 +94,51 @@ const changeRoleFromDB = async (userInfo: { role: string; email: string }) => {
   return result;
 };
 
+// const changePassword = async (
+//   _id: string,
+//   payload: { oldPassword: string; newPassword: string },
+// ) => {
+//   // checking if the user is exist
+//   const user = await UserRegister.findById(_id);
+//   console.log('p', user);
+
+//   if (!user) {
+//     throw new AppError(StatusCodes.NOT_FOUND, 'This user is not found !');
+//   }
+//   // checking if the user is already deleted
+
+//   // checking if the user is blocked
+
+//   //checking if the password is correct
+
+//   // if (!(await UserRegister.isPasswordMatched(payload.oldPassword, user?.password)))
+//   //   throw new AppError(
+//   //     StatusCodes.FORBIDDEN,
+//   //     'Password do not matched',
+//   //   );
+
+//   //hash new password
+//   // const newHashedPassword = await bcrypt.hash(
+//   //   payload.newPassword,
+//   //   Number(config.bcrypt_salt_rounds),
+//   // );
+
+//   // await UserRegister.findOneAndUpdate(
+//   //   {
+//   //     id: userData.userId,
+//   //     role: userData.role,
+//   //   },
+//   //   {
+//   //     password: newHashedPassword,
+//   //     needsPasswordChange: false,
+//   //     // for when password is changed
+//   //     passwordChangedAt: new Date(),
+//   //   },
+//   // );
+
+//   return null;
+// };
+
 export const AuthServices = {
   loginUser,
   registerUser,
@@ -101,4 +146,5 @@ export const AuthServices = {
   deActiveAccount,
   makeActiveAccount,
   changeRoleFromDB,
+  // changePassword,
 };
